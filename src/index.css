@@ -30,9 +30,10 @@ code {
 }
 
 .App {
-  margin: 10px;
+  margin: 10px auto;
   border: 8px solid brown;
   border-radius: 3px;
+  max-width: 500px;
 }
 
 .App .special .button {
