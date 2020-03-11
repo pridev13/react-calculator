@@ -41,17 +41,26 @@ code {
 }
 
 .App .display-wrapper {
-  min-height: 100px;
+  height: 100px;
   overflow-y: auto;
   background-color:lightslategray;
 }
 
-.App .display-wrapper .display {
-  min-height: 100%;
+.App .display-wrapper .input {
+  height: 65%;
   width: 100%;
   text-align: center;
   padding: 10px auto;
   font-size: 50px;
+}
+
+.App .display-wrapper .result {
+  height: 35%;
+  width: 100%;
+  text-align: right;
+  padding: 4px;
+  font-size: 20px;
+  background-color: darkgray;
 }
 
 .App .numbers {

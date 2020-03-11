@@ -5,11 +5,14 @@ const display = (props) => {
   console.log('RNDRNG display');
 
   return (
-    <div
-      className="display"
-    >
-      {props.display}
-    </div>
+    <React.Fragment>
+      <div className="input">
+        {props.display}
+      </div>
+      <div className="result">
+        {props.result}
+      </div>
+    </React.Fragment>
   );
 
 }

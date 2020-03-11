@@ -4,13 +4,16 @@ import Options from './components/Options/Options';
 import InputOptions from './components/InputOptions/InputOptions';
 import Display from './components/Display/Display';
 
-const numberOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-const calcOptions = ["+", "-", "/", "x"];
+import {evaluate} from 'mathjs';
+
+const numberOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "."];
+const calcOptions = [" + ", " - ", " / ", " x "];
 
 class App extends Component {
 
   state = {
-    display: ""
+    display: "",
+    result: ""
   }
 
   addToInput = (input) => {
@@ -29,6 +32,14 @@ class App extends Component {
 
   }
 
+  clearResult = () => {
+
+    this.setState({
+      result: ""
+    });
+
+  }
+
   removeLastInput = () => {
 
     this.setState((prevState) => ({
@@ -38,13 +49,44 @@ class App extends Component {
   }
 
   clearMemory = () => {
+
     //...
+    this.clearInput();
+    this.clearResult();
+
     console.log('Mem cleared');
+
   }
 
-  doCalc = () => {
-    //...
+  doCalc = (input) => {
+
+    let result = 'NaN';
+
+    input = input.replace(" ", "");
+    input = input.replace("x", "*");
+
+    try {
+      result = evaluate(input);
+      
+    }catch (error) {
+      console.log('Error occured') ;
+    }
+
+    return result;
+
+  }
+
+  getResult = () => {
+
+    const result = this.doCalc(this.state.display);
+
+    this.setState({
+      display: result.toString(),
+      result: this.state.display + " = " + result
+    });
+
     console.log('Result calculated');
+
   }
 
   render() {
@@ -53,7 +95,10 @@ class App extends Component {
       <div className="App clearfix">
 
         <div className="display-wrapper">
-          <Display display={this.state.display} />
+          <Display
+            display={this.state.display}
+            result={this.state.result}
+          />
         </div>
 
         <div className="special clearfix">
@@ -61,7 +106,7 @@ class App extends Component {
             clearInput={this.clearInput}
             delInput={this.removeLastInput}
             memClear={this.clearMemory}
-            doCalc={this.doCalc}
+            doCalc={this.getResult}
           />
         </div>
 
