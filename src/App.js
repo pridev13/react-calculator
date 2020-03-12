@@ -173,7 +173,7 @@ class App extends Component {
 
     return (
 
-      <div className="App clearfix" onKeyUp={(e) => console.log(e)}>
+      <div className="App">
 
         <div className="display-wrapper">
           <Display
@@ -182,7 +182,7 @@ class App extends Component {
           />
         </div>
 
-        <div className="special clearfix">
+        <div className="special">
           <Options
             clearInput={this.clearInput}
             delInput={this.removeLastInput}
@@ -191,14 +191,14 @@ class App extends Component {
           />
         </div>
 
-        <div className="numbers clearfix">
+        <div className="numbers">
           <InputOptions
             options={numberOptions}
             addInput={this.addToInput}
           />
         </div>
 
-        <div className="calc clearfix">
+        <div className="calc">
           <InputOptions
             options={calcOptions}
             addInput={this.addToInput}

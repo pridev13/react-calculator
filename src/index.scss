@@ -1,0 +1,172 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.button {
+  border: 1px solid #666;
+  padding: 5px;
+  text-align: center;
+  display: grid;
+  align-content: center;
+  font-size: 6vh;
+  box-shadow: inset 0px 0px 40px #ccc;
+  background-color: #fff;
+}
+
+.App {
+  margin: 10px auto;
+  border: 30px solid #444;
+  border-radius: 15px;
+  width: 85vw;
+  max-width: 900px;
+  min-width: 300px;
+  height: 95vh;
+  max-height: 85vw;
+  box-shadow: 15px 15px 5px 0px #888;
+
+  display: grid;
+  grid-template-columns: repeat(4, 25%);
+  grid-template-rows: 25% 15% auto;
+
+  .display-wrapper {
+    grid-column-start: span 4;
+    height: 100%;
+    overflow-y: auto;
+    background-color: lightslategray;
+
+    .input {
+      height: 65%;
+      width: 100%;
+      text-align: center;
+      padding: 10px auto;
+      font-size: 8vh;
+      display: grid;
+      align-content: center;
+      box-shadow: inset 0px 0px 50px #333;
+    }
+
+    .result {
+      height: 35%;
+      width: 100%;
+      text-align: right;
+      padding: 4px;
+      font-size: 3.5vh;
+      background-color: darkgray;
+      box-shadow: inset 0px 0px 40px #777;
+      display: grid;
+      align-content: center;
+    }
+  }
+
+  .special {
+    grid-column-start: span 4;
+
+    .options {
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(4, 25%);
+      align-items: stretch;
+
+      .button {
+        background-color: green;
+        align-self: stretch;
+        box-shadow: inset 0px 0px 40px darkgreen;
+      }
+    }
+  }
+
+  .numbers {
+    grid-column-start: span 3;
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(6, calc(100% / 6));
+      height: 100%;
+
+      .button {
+        grid-column-start: span 2;
+
+        &:nth-child(10),
+        &:nth-child(11) {
+          grid-column-start: span 3;
+        }
+      }
+    }
+  }
+
+  .calc {
+    .options {
+      display: grid;
+      height: 100%;
+
+      .button {
+        background-color: orange;
+        box-shadow: inset 0px 0px 40px darkorange;
+      }
+    }
+  }
+}
+
+@media (orientation: portrait) {
+  .App {
+    max-height: 100vw;
+  }
+}
+
+@media (orientation: portrait) and (max-aspect-ratio: 7/10) {
+  .App {
+    max-height: 125vw;
+    min-height: 50vh;
+  }
+}
+
+@media (orientation: landscape) {
+  .App {
+    max-height: 90vh;
+  }
+}
+
+@media (max-width: 400px) and (orientation: portrait) {
+  .button {
+    font-size: 3vh;
+  }
+
+  .App {
+    border: 18px solid #444;
+
+    .display-wrapper {
+      .input {
+        font-size: 5vh;
+      }
+
+      .result {
+        font-size: 2.5vh;
+      }
+    }
+
+    .numbers {
+      grid-column-start: span 4;
+      order: 1;
+    }
+
+    .calc {
+      grid-column-start: span 4;
+
+      .options {
+        grid-template-columns: repeat(4, 25%);
+      }
+    }
+  }
+}
