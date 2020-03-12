@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Options from './components/Options/Options';
 import InputOptions from './components/InputOptions/InputOptions';
 import Display from './components/Display/Display';
+import History from './components/History/History';
 
 import { evaluate } from 'mathjs';
 
@@ -13,7 +14,20 @@ class App extends Component {
 
   state = {
     display: "",
-    result: ""
+    result: "",
+    history: []
+  }
+
+  componentDidMount() {
+
+    const savedHistory = localStorage.getItem('calcHistory');
+
+    if (savedHistory) {
+      this.setState({
+        history: JSON.parse(savedHistory)
+      });
+    }
+
   }
 
   sanitizeInput = (current, input) => {
@@ -74,6 +88,20 @@ class App extends Component {
 
   }
 
+  restoreFromHistory = (key) => {
+    console.log('History: ' + this.state.history[key]);
+
+    if(this.state.history[key]) {
+
+      this.setState({
+        display: this.state.history[key].result.toString(),
+        result: this.state.history[key].input + " = " + this.state.history[key].result
+      });
+
+    }
+
+  }
+
   clearInput = () => {
 
     this.setState({
@@ -109,9 +137,10 @@ class App extends Component {
 
   clearMemory = () => {
 
-    //...
     this.clearInput();
     this.clearResult();
+    localStorage.removeItem('calcHistory');
+    this.setState({ history: [] });
 
     console.log('Mem cleared');
 
@@ -154,15 +183,23 @@ class App extends Component {
 
     let newDisplay = this.state.display;
     let newResult = this.state.result;
+    let newHistory = [...this.state.history];
 
     if (result !== false) {
       newDisplay = result.toString();
       newResult = this.state.display + " = " + result;
+      newHistory = this.state.history.concat({
+        input: this.state.display,
+        result: result
+      });
+
+      localStorage.setItem('calcHistory', JSON.stringify(newHistory));
     }
 
     this.setState({
       display: newDisplay,
-      result: newResult
+      result: newResult,
+      history: newHistory
     });
 
     console.log('Result calculated');
@@ -174,6 +211,11 @@ class App extends Component {
     return (
 
       <div className="App">
+
+        <History
+          history={this.state.history}
+          clicked={this.restoreFromHistory}
+        />
 
         <div className="display-wrapper">
           <Display
