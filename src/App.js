@@ -7,7 +7,7 @@ import Display from './components/Display/Display';
 import { evaluate } from 'mathjs';
 
 const numberOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "."];
-const calcOptions = [" + ", " - ", " / ", " x "];
+const calcOptions = [" + ", " - ", " / ", " * "];
 
 class App extends Component {
 
@@ -129,7 +129,7 @@ class App extends Component {
     const lastIsNum = !isNaN(parseFloat(elements.slice(-1))) && isFinite(elements.slice(-1));
     const lastIsDot = input.toString().trim().slice(-1) === '.';
 
-    if(inputIsEmpty || elements.length < 3 || !lastIsNum || lastIsDot) {
+    if (inputIsEmpty || elements.length < 3 || !lastIsNum || lastIsDot) {
       return false;
     }
 
@@ -155,7 +155,7 @@ class App extends Component {
     let newDisplay = this.state.display;
     let newResult = this.state.result;
 
-    if(result !== false) {
+    if (result !== false) {
       newDisplay = result.toString();
       newResult = this.state.display + " = " + result;
     }
@@ -172,7 +172,8 @@ class App extends Component {
   render() {
 
     return (
-      <div className="App clearfix">
+
+      <div className="App clearfix" onKeyUp={(e) => console.log(e)}>
 
         <div className="display-wrapper">
           <Display

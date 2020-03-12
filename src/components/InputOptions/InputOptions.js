@@ -1,4 +1,5 @@
 import React from 'react';
+import KeyboardEventHandler from 'react-keyboard-event-handler';
 import Button from '../UI/button';
 
 const inputOptions = React.memo((props) => {
@@ -10,11 +11,20 @@ const inputOptions = React.memo((props) => {
       className="options"
     >
       {props.options.map((el) => (
-        <Button
+        <React.Fragment
           key={el}
-          value={el}
-          clicked={() => {props.addInput(el)}}
-        />
+        >
+
+          <Button
+            value={el}
+            clicked={() => { props.addInput(el) }}
+          />
+          <KeyboardEventHandler
+            handleKeys={[el.toString()]}
+            onKeyEvent={() => { props.addInput(el) }}
+          />
+
+        </React.Fragment>
       ))}
     </div>
   );
