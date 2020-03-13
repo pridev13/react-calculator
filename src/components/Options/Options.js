@@ -4,8 +4,6 @@ import Button from '../UI/button';
 
 const options = React.memo((props) => {
 
-  console.log('RNDRNG options');
-
   return (
     <div className="options">
 
@@ -23,7 +21,7 @@ const options = React.memo((props) => {
         clicked={props.clearInput}
       />
       <KeyboardEventHandler
-        handleKeys={['esc']}
+        handleKeys={['esc', 'del']}
         onKeyEvent={() => { props.clearInput() }}
       />
 

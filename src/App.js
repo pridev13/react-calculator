@@ -89,7 +89,6 @@ class App extends Component {
   }
 
   restoreFromHistory = (key) => {
-    console.log('History: ' + this.state.history[key]);
 
     if(this.state.history[key]) {
 
@@ -141,8 +140,6 @@ class App extends Component {
     this.clearResult();
     localStorage.removeItem('calcHistory');
     this.setState({ history: [] });
-
-    console.log('Mem cleared');
 
   }
 
@@ -201,8 +198,6 @@ class App extends Component {
       result: newResult,
       history: newHistory
     });
-
-    console.log('Result calculated');
 
   }
 

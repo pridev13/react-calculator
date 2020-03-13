@@ -2,8 +2,6 @@ import React from 'react';
 
 const display = (props) => {
 
-  console.log('RNDRNG display');
-
   return (
     <React.Fragment>
       <div className="input">

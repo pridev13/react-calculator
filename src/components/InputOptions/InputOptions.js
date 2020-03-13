@@ -4,8 +4,6 @@ import Button from '../UI/button';
 
 const inputOptions = React.memo((props) => {
 
-  console.log('RNDRNG inputOptions');
-
   return (
     <div
       className="options"
